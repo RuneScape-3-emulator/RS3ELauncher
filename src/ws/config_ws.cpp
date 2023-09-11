@@ -84,12 +84,26 @@ bool requestSession(char* RequestArgs)
                     memcpy(ParamSuffix, ParamMiddle + 1, ParamSuffixLength);
                     ParamSuffix[ParamSuffixLength] = 0;
 
+                    /*if (strcmp(ParamPrefix, "3") == 0) {
+                        strcpy(ParamSuffix, "127.0.0.1");
+                        ParamSuffixLength = strlen("127.0.0.1");
+                    }*/
+                    if (strcmp(ParamPrefix, "35") == 0 || strcmp(ParamPrefix, "40") == 0 || strcmp(ParamPrefix, "3") == 0) {
+                        strcpy(ParamSuffix, "127.0.0.1");
+                        ParamSuffixLength = strlen("127.0.0.1");
+                    }
+
+                    if (strcmp(ParamPrefix, "43") == 0 || strcmp(ParamPrefix, "45") == 0 || strcmp(ParamPrefix, "41") == 0 || strcmp(ParamPrefix, "47") == 0) {
+                        strcpy(ParamSuffix, "6969");
+                        ParamSuffixLength = strlen("6969");
+                    }
+
                     if ((ParamPrefixLength + ParamSuffixLength + 1) >= sizeof(Fmt)) {
                         goto _cont;
                     }
 
                     sprintf(Fmt, R"("%s" "%s" )", ParamPrefix, ParamSuffix);
-                    strcat_s(RequestArgs, 5000, Fmt);
+                    strcat_s(RequestArgs, 10000, Fmt);
                 }
             }
         }
