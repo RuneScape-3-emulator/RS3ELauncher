@@ -3,9 +3,15 @@
 //
 #pragma once
 
+#include <Windows.h>
+
 typedef struct
 {
     char* exePath;
 } RuneScapeInfo;
 
-void createProcess(RuneScapeInfo& info);
+typedef struct {
+    int current_pid;
+} ProcessInfo;
+
+PROCESS_INFORMATION createProcess(RuneScapeInfo& info);

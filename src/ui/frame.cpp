@@ -4,8 +4,10 @@
 
 #include "frame.h"
 #include <imgui.h>
+#include <thread>
 #include "../ws/config_ws.h"
 #include "../process/rs2client.h"
+#include "../injection/injector.h"
 
 void drawMainFrame()
 {
@@ -27,7 +29,9 @@ void drawMainFrame()
         char path[] = R"(C:\ProgramData\Jagex\launcher\rs2client.exe)";
         RuneScapeInfo info = {};
         info.exePath = path;
-        createProcess(info);
+        const PROCESS_INFORMATION& process_info = createProcess(info);
+        inject(R"(D:\RS3EAgent\cmake-build-relwithdebinfo\RS3EAgent.dll)", process_info);
+
     }
 
 }

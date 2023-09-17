@@ -3,10 +3,9 @@
 //
 
 #include "rs2client.h"
-#include <Windows.h>
 #include "../ws/config_ws.h"
 
-void createProcess(RuneScapeInfo &rsInfo)
+PROCESS_INFORMATION createProcess(RuneScapeInfo &rsInfo)
 {
     CHAR RequestArgs[4096] = {0};
     CHAR Dir[MAX_PATH] = {0};
@@ -20,7 +19,7 @@ void createProcess(RuneScapeInfo &rsInfo)
 
     int SessionResp = requestSession(RequestArgs);
     if (SessionResp == 0) {
-        return;
+        return processInfo;
     }
 
     size_t Len = strlen(rsInfo.exePath);
@@ -53,6 +52,8 @@ void createProcess(RuneScapeInfo &rsInfo)
         WaitForSingleObject(processInfo.hProcess, INFINITE);
         CloseHandle(processInfo.hProcess);
         CloseHandle(processInfo.hThread);
-        return;
+        return processInfo;
     }
+
+    return processInfo;
 }
